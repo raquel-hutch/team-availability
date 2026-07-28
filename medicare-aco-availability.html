@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CMH Medicare ACO – August/Sept Availability</title>
+<style>
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; background: #f9f9f9; }
+  h1 { color: #1a3c6e; font-size: 1.4rem; margin-bottom: 4px; }
+  .subtitle { color: #666; font-size: 0.85rem; margin-bottom: 16px; }
+  .legend { display: flex; gap: 18px; margin-bottom: 12px; font-size: 0.82rem; }
+  .legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .legend .swatch { width: 16px; height: 16px; border-radius: 3px; display: inline-block; }
+  table { border-collapse: collapse; font-size: 0.78rem; }
+  th, td { border: 1px solid #ccc; text-align: center; padding: 3px 5px; min-width: 28px; }
+  th { background: #1a3c6e; color: #fff; font-weight: 600; position: sticky; top: 0; z-index: 2; }
+  th.name { text-align: left; min-width: 140px; }
+  td.name { text-align: left; font-weight: 600; white-space: nowrap; }
+  .week-header { background: #e8edf3; font-weight: 700; color: #1a3c6e; }
+  .avail   { background: #c6efce; } /* green – available */
+  .ooo     { background: #f4a4a4; } /* red – OOO */
+  .partial { background: #ffe699; } /* yellow – partial / tentative */
+  .holiday { background: #d9d9d9; } /* gray – holiday */
+  .weekend { background: #f2f2f2; }
+  .today   { outline: 2px solid #1a3c6e; outline-offset: -1px; }
+  .count-row td { font-weight: 700; background: #eef2f7; }
+  .dow { font-size: 0.7rem; color: #cde; display: block; }
+</style>
+</head>
+<body>
+<h1>CMH Medicare ACO – OOO &amp; Availability Grid</h1>
+<p class="subtitle">Source: Caroline Li's Teams post (7/23/2026) + replies &bull; Deadline: 9/8 drop</p>
+
+<div class="legend">
+  <span><span class="swatch" style="background:#c6efce"></span> Available</span>
+  <span><span class="swatch" style="background:#f4a4a4"></span> OOO</span>
+  <span><span class="swatch" style="background:#ffe699"></span> Partial / Tentative</span>
+  <span><span class="swatch" style="background:#d9d9d9"></span> Holiday</span>
+</div>
+
+<table>
+<thead>
+<tr>
+  <th class="name">Name</th>
+  <!-- Week of 7/27 -->
+  <th colspan="4" class="week-header" style="background:#e8edf3;color:#1a3c6e">Week of 7/27</th>
+  <!-- Week of 8/3 -->
+  <th colspan="5" class="week-header" style="background:#e8edf3;color:#1a3c6e">Week of 8/3</th>
+  <!-- Week of 8/10 -->
+  <th colspan="5" class="week-header" style="background:#e8edf3;color:#1a3c6e">Week of 8/10</th>
+  <!-- Week of 8/17 -->
+  <th colspan="5" class="week-header" style="background:#e8edf3;color:#1a3c6e">Week of 8/17</th>
+  <!-- Week of 8/24 -->
+  <th colspan="5" class="week-header" style="background:#e8edf3;color:#1a3c6e">Week of 8/24</th>
+  <!-- Week of 8/31 -->
+  <th colspan="5" class="week-header" style="background:#e8edf3;color:#1a3c6e">Week of 8/31</th>
+  <!-- Week of 9/7 -->
+  <th colspan="2" class="week-header" style="background:#e8edf3;color:#1a3c6e">9/7</th>
+</tr>
+<tr>
+  <th class="name"></th>
+  <!-- 7/27 week: Tue-Fri -->
+  <th>28<span class="dow">Tue</span></th>
+  <th>29<span class="dow">Wed</span></th>
+  <th>30<span class="dow">Thu</span></th>
+  <th>31<span class="dow">Fri</span></th>
+  <!-- 8/3 week -->
+  <th>3<span class="dow">Mon</span></th>
+  <th>4<span class="dow">Tue</span></th>
+  <th>5<span class="dow">Wed</span></th>
+  <th>6<span class="dow">Thu</span></th>
+  <th>7<span class="dow">Fri</span></th>
+  <!-- 8/10 week -->
+  <th>10<span class="dow">Mon</span></th>
+  <th>11<span class="dow">Tue</span></th>
+  <th>12<span class="dow">Wed</span></th>
+  <th>13<span class="dow">Thu</span></th>
+  <th>14<span class="dow">Fri</span></th>
+  <!-- 8/17 week -->
+  <th>17<span class="dow">Mon</span></th>
+  <th>18<span class="dow">Tue</span></th>
+  <th>19<span class="dow">Wed</span></th>
+  <th>20<span class="dow">Thu</span></th>
+  <th>21<span class="dow">Fri</span></th>
+  <!-- 8/24 week -->
+  <th>24<span class="dow">Mon</span></th>
+  <th>25<span class="dow">Tue</span></th>
+  <th>26<span class="dow">Wed</span></th>
+  <th>27<span class="dow">Thu</span></th>
+  <th>28<span class="dow">Fri</span></th>
+  <!-- 8/31 week -->
+  <th>31<span class="dow">Mon</span></th>
+  <th>1<span class="dow">Tue</span></th>
+  <th>2<span class="dow">Wed</span></th>
+  <th>3<span class="dow">Thu</span></th>
+  <th>4<span class="dow">Fri</span></th>
+  <!-- 9/7 week -->
+  <th>7<span class="dow">Mon</span></th>
+  <th>8<span class="dow">Tue</span></th>
+</tr>
+</thead>
+<tbody>
+
+<!-- Caroline Li: 8/21-9/6 OOO -->
+<tr>
+  <td class="name">Caroline Li</td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="ooo" title="8/21-9/6 China, no VPN">OOO</td>
+  <td class="ooo">OOO</td><td class="ooo">OOO</td><td class="ooo">OOO</td><td class="ooo">OOO</td><td class="ooo">OOO</td>
+  <td class="ooo">OOO</td><td class="ooo">OOO</td><td class="ooo">OOO</td><td class="ooo">OOO</td><td class="ooo">OOO</td>
+  <td class="holiday" title="Labor Day">LD</td><td class="avail"></td>
+</tr>
+
+<!-- Kara: 8/25-9/6 -->
+<tr>
+  <td class="name">Kara</td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="ooo" title="8/25-9/6">OOO</td><td class="ooo">OOO</td><td class="ooo">OOO</td><td class="ooo">OOO</td>
+  <td class="ooo">OOO</td><td class="ooo">OOO</td><td class="ooo">OOO</td><td class="ooo">OOO</td><td class="ooo">OOO</td>
+  <td class="holiday" title="Labor Day">LD</td><td class="avail"></td>
+</tr>
+
+<!-- Michael LeClaire: 8/22(Sat)-8/30(Sat) → biz days 8/24-8/28 -->
+<tr>
+  <td class="name">Michael LeClaire</td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="ooo" title="8/22-8/30">OOO</td><td class="ooo">OOO</td><td class="ooo">OOO</td><td class="ooo">OOO</td><td class="ooo">OOO</td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="holiday" title="Labor Day">LD</td><td class="avail"></td>
+</tr>
+
+<!-- Nikaya Smith: 8/5-8/7, 9/1-9/3 -->
+<tr>
+  <td class="name">Nikaya Smith</td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="ooo" title="8/5-8/7">OOO</td><td class="ooo">OOO</td><td class="ooo">OOO</td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="ooo" title="9/1-9/3 New Hire Orientation">OOO</td><td class="ooo">OOO</td><td class="ooo">OOO</td><td class="avail"></td>
+  <td class="holiday" title="Labor Day">LD</td><td class="avail"></td>
+</tr>
+
+<!-- Noah Gorman: 8/13-8/17, 9/1-9/3 -->
+<tr>
+  <td class="name">Noah Gorman</td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="ooo" title="8/13-8/17 family visiting">OOO</td><td class="ooo" title="8/13-8/17">OOO</td>
+  <td class="ooo" title="8/13-8/17">OOO</td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="ooo" title="9/1-9/3 New Hire Orientation">OOO</td><td class="ooo">OOO</td><td class="ooo">OOO</td><td class="avail"></td>
+  <td class="holiday" title="Labor Day">LD</td><td class="avail"></td>
+</tr>
+
+<!-- Richard Denny: 7/31, 8/3-8/7 tentative (jury), 8/10-8/12 -->
+<tr>
+  <td class="name">Richard Denny</td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="ooo" title="7/31 Moving">OOO</td>
+  <td class="partial" title="8/3-8/7 Jury Duty on-call">JD?</td><td class="partial">JD?</td><td class="partial">JD?</td><td class="partial">JD?</td><td class="partial">JD?</td>
+  <td class="ooo" title="8/10-8/12 Camping">OOO</td><td class="ooo">OOO</td><td class="ooo">OOO</td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="holiday" title="Labor Day">LD</td><td class="avail"></td>
+</tr>
+
+<!-- Mitch: 7/29-8/14 -->
+<tr>
+  <td class="name">Mitch</td>
+  <td class="avail"></td><td class="ooo" title="7/29-8/14">OOO</td><td class="ooo">OOO</td><td class="ooo">OOO</td>
+  <td class="ooo">OOO</td><td class="ooo">OOO</td><td class="ooo">OOO</td><td class="ooo">OOO</td><td class="ooo">OOO</td>
+  <td class="ooo">OOO</td><td class="ooo">OOO</td><td class="ooo">OOO</td><td class="ooo">OOO</td><td class="ooo">OOO</td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="holiday" title="Labor Day">LD</td><td class="avail"></td>
+</tr>
+
+<!-- Amaya Keiper: 7/30-8/3 (partial Thu/Mon mornings OK), 9/7 Labor Day -->
+<tr>
+  <td class="name">Amaya Keiper</td>
+  <td class="avail"></td><td class="avail"></td><td class="ooo" title="7/30 OOO">OOO</td><td class="ooo" title="7/31 OOO">OOO</td>
+  <td class="ooo" title="8/3 OOO">OOO</td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="holiday" title="Labor Day">LD</td><td class="avail"></td>
+</tr>
+
+<!-- Cissie Wu: 8/21-8/24, 9/4 limited -->
+<tr>
+  <td class="name">Cissie Wu</td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="ooo" title="8/21-8/24">OOO</td>
+  <td class="ooo">OOO</td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="ooo" title="9/4 limited availability">OOO</td>
+  <td class="holiday" title="Labor Day">LD</td><td class="avail"></td>
+</tr>
+
+<!-- Aanika Mathew: 8/20-8/22, 9/3-9/13 -->
+<tr>
+  <td class="name">Aanika Mathew</td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="ooo" title="8/20-8/22">OOO</td><td class="ooo">OOO</td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="ooo" title="9/3-9/13">OOO</td><td class="ooo">OOO</td>
+  <td class="ooo" title="9/7-9/13 + Labor Day">OOO</td><td class="ooo">OOO</td>
+</tr>
+
+<!-- Jessi Dougherty: 8/21 -->
+<tr>
+  <td class="name">Jessi Dougherty</td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="ooo" title="8/21">OOO</td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="holiday" title="Labor Day">LD</td><td class="avail"></td>
+</tr>
+
+<!-- Jack Sveum: 8/14-8/16, 8/28-8/29, 9/4-9/7 -->
+<tr>
+  <td class="name">Jack Sveum</td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="ooo" title="8/14-8/16">OOO</td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="ooo" title="8/28-8/29">OOO</td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="ooo" title="9/4-9/7">OOO</td>
+  <td class="ooo" title="9/4-9/7 + Labor Day">OOO</td><td class="avail"></td>
+</tr>
+
+<!-- Amanda Snyder: 8/7-8/9, 8/20-8/23 -->
+<tr>
+  <td class="name">Amanda Snyder</td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="ooo" title="8/7-8/9">OOO</td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="ooo" title="8/20-8/23">OOO</td><td class="ooo">OOO</td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td><td class="avail"></td>
+  <td class="holiday" title="Labor Day">LD</td><td class="avail"></td>
+</tr>
+
+<!-- Count row: # OOO per day -->
+<tr class="count-row">
+  <td class="name" style="color:#c00">OOO count</td>
+  <!-- 7/28 -->  <td>0</td>
+  <!-- 7/29 -->  <td>1</td>
+  <!-- 7/30 -->  <td>3</td>
+  <!-- 7/31 -->  <td>4</td>
+  <!-- 8/3  -->  <td>3</td>
+  <!-- 8/4  -->  <td>1</td>
+  <!-- 8/5  -->  <td>2</td>
+  <!-- 8/6  -->  <td>2</td>
+  <!-- 8/7  -->  <td>3</td>
+  <!-- 8/10 -->  <td>2</td>
+  <!-- 8/11 -->  <td>2</td>
+  <!-- 8/12 -->  <td>2</td>
+  <!-- 8/13 -->  <td>3</td>
+  <!-- 8/14 -->  <td>4</td>
+  <!-- 8/17 -->  <td>2</td>
+  <!-- 8/18 -->  <td>0</td>
+  <!-- 8/19 -->  <td>0</td>
+  <!-- 8/20 -->  <td>3</td>
+  <!-- 8/21 -->  <td>6</td>
+  <!-- 8/24 -->  <td>3</td>
+  <!-- 8/25 -->  <td>3</td>
+  <!-- 8/26 -->  <td>3</td>
+  <!-- 8/27 -->  <td>3</td>
+  <!-- 8/28 -->  <td>4</td>
+  <!-- 8/31 -->  <td>2</td>
+  <!-- 9/1  -->  <td>4</td>
+  <!-- 9/2  -->  <td>4</td>
+  <!-- 9/3  -->  <td>5</td>
+  <!-- 9/4  -->  <td>5</td>
+  <!-- 9/7  -->  <td>3</td>
+  <!-- 9/8  -->  <td>1</td>
+</tr>
+
+</tbody>
+</table>
+
+<p style="font-size:0.8rem; color:#888; margin-top:16px;">
+  <strong>Notes:</strong>
+  JD? = Jury Duty on-call (likely working, may need flexibility) &bull;
+  LD = Labor Day (9/7) &bull;
+  Hover cells for details.
+</p>
+
+</body>
+</html>
