@@ -35,6 +35,19 @@ HOLIDAYS = {
     datetime.date(2026, 11, 27): "Day after Thanksgiving",
 }
 
+# Humana/Milliman Lessons Learned Check-In dates
+MEETING_DAYS = {
+    datetime.date(2026, 8, 28): "Lessons Learned Check-In",
+    datetime.date(2026, 9, 23): "Lessons Learned Check-In",
+    datetime.date(2026, 10, 28): "Lessons Learned Check-In",
+    datetime.date(2026, 11, 18): "Lessons Learned Check-In",
+}
+
+# Special event spans (box + overlay label)
+EVENT_SPANS = [
+    (datetime.date(2026, 10, 5), datetime.date(2026, 10, 9), "FORUM"),
+]
+
 # Manual OOO overrides (dates not on Outlook calendars)
 MANUAL_OOO = {
     "jake.klaisner@milliman.com": [
@@ -171,16 +184,44 @@ def generate_html(people, ooo):
     DOW = ["Mon", "Tue", "Wed", "Thu", "Fri"]
     rows = []
 
-    for email in ordered_emails:
+    # Precompute event span info
+    event_dates = {}  # date -> (label, is_first, is_last)
+    for evt_start, evt_end, label in EVENT_SPANS:
+        d = evt_start
+        while d <= evt_end:
+            if d.weekday() < 5 and START <= d <= END:
+                event_dates[d] = (label, d == evt_start, d == evt_end)
+            d += datetime.timedelta(days=1)
+
+    for idx, email in enumerate(ordered_emails):
         name = people[email]
+        is_first_row = (idx == 0)
+        is_last_row = (idx == len(ordered_emails) - 1)
         cells = []
         for d in days:
-            if d in HOLIDAYS:
-                cells.append(f'<td class="holiday" title="{HOLIDAYS[d]}"></td>')
+            evt_classes = ""
+            if d in event_dates:
+                _, is_first_col, is_last_col = event_dates[d]
+                if is_first_row:
+                    evt_classes += " event-top"
+                if is_last_row:
+                    evt_classes += " event-bottom"
+                if is_first_col:
+                    evt_classes += " event-left"
+                if is_last_col:
+                    evt_classes += " event-right"
+            if d in HOLIDAYS and d in ooo[email]:
+                cells.append(f'<td class="holiday-ooo{evt_classes}" title="{HOLIDAYS[d]}">OOO</td>')
+            elif d in HOLIDAYS:
+                cells.append(f'<td class="holiday{evt_classes}" title="{HOLIDAYS[d]}"></td>')
+            elif d in MEETING_DAYS and d in ooo[email]:
+                cells.append(f'<td class="meeting-ooo{evt_classes}" title="{MEETING_DAYS[d]}">OOO</td>')
+            elif d in MEETING_DAYS:
+                cells.append(f'<td class="meeting{evt_classes}" title="{MEETING_DAYS[d]}"></td>')
             elif d in ooo[email]:
-                cells.append('<td class="ooo">OOO</td>')
+                cells.append(f'<td class="ooo{evt_classes}">OOO</td>')
             else:
-                cells.append('<td class="avail"></td>')
+                cells.append(f'<td class="avail{evt_classes}"></td>')
         rows.append(f'<tr><td class="name">{name}</td>{"".join(cells)}</tr>')
 
     # OOO count row
@@ -189,6 +230,11 @@ def generate_html(people, ooo):
     for d in days:
         if d in HOLIDAYS:
             count_cells.append('<td class="holiday">\u2014</td>')
+        elif d in MEETING_DAYS:
+            c = sum(1 for email in people if d in ooo[email])
+            cls = ' class="meeting-ooo"' if c >= total * 0.4 else ' class="meeting"'
+            count_cells.append(f'<td{cls}>{c}</td>')
+            continue
         else:
             c = sum(1 for email in people if d in ooo[email])
             cls = ' class="hot"' if c >= total * 0.4 else ''
@@ -220,10 +266,24 @@ def generate_html(people, ooo):
   .month-header {{ background: #344e7a; color: #fff; font-weight: 700; font-size: 0.8rem; }}
   .avail   {{ background: #c6efce; }}
   .ooo     {{ background: #f4a4a4; }}
-  .holiday {{ background: #d9d9d9; }}
+  .meeting {{ background: #ffe699; }}
+  .meeting-ooo {{ background: #ffe699; color: #a04000; font-weight: 700; }}
+  .holiday {{ background: repeating-linear-gradient(45deg, #c6efce, #c6efce 3px, #a8e6a0 3px, #a8e6a0 6px); }}
+  .holiday-ooo {{ background: #f4a4a4; color: #600; font-weight: 700; }}
   .dow {{ font-size: 0.65rem; color: #b0c4de; display: block; }}
   .count-row td {{ font-weight: 700; background: #eef2f7; }}
   .count-row td.hot {{ background: #f4a4a4; color: #600; }}
+  .event-box {{ position: relative; }}
+  .event-overlay {{
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem; font-weight: 900; color: rgba(26,60,110,0.18);
+    pointer-events: none; letter-spacing: 0.15em; z-index: 1;
+  }}
+  .event-left {{ border-left: 3px solid #1a3c6e; }}
+  .event-right {{ border-right: 3px solid #1a3c6e; }}
+  .event-top {{ border-top: 3px solid #1a3c6e; }}
+  .event-bottom {{ border-bottom: 3px solid #1a3c6e; }}
 </style>
 </head>
 <body>
@@ -232,7 +292,7 @@ def generate_html(people, ooo):
 <div class="legend">
   <span><span class="swatch" style="background:#c6efce"></span> Available</span>
   <span><span class="swatch" style="background:#f4a4a4"></span> OOO</span>
-  <span><span class="swatch" style="background:#d9d9d9"></span> Holiday</span>
+  <span><span class="swatch" style="background:#ffe699"></span> Lessons Learned Check-In</span>
 </div>
 <div class="container">
 <table>
@@ -249,6 +309,41 @@ def generate_html(people, ooo):
 <p style="font-size:0.8rem; color:#888; margin-top:16px;">
   Only full-day OOO calendar events are shown. Hover cells for holiday names.
 </p>
+<script>
+// Overlay labels on event spans
+document.addEventListener('DOMContentLoaded', function() {{
+  const table = document.querySelector('table');
+  const rect = table.getBoundingClientRect();
+  const container = document.querySelector('.container');
+  container.style.position = 'relative';
+  const spans = {json.dumps([(evt_start.isoformat(), evt_end.isoformat(), label) for evt_start, evt_end, label in EVENT_SPANS])};
+  const days = {json.dumps([d.isoformat() for d in days])};
+  const headerRow = table.querySelectorAll('thead tr:last-child th');
+  spans.forEach(function(span) {{
+    const startIdx = days.indexOf(span[0]);
+    const endIdx = days.indexOf(span[1]);
+    if (startIdx < 0 || endIdx < 0) return;
+    const firstTh = headerRow[startIdx + 1];
+    const lastTh = headerRow[endIdx + 1];
+    const tRect = table.getBoundingClientRect();
+    const fRect = firstTh.getBoundingClientRect();
+    const lRect = lastTh.getBoundingClientRect();
+    const rows = table.querySelectorAll('tbody tr');
+    const firstRow = rows[0].getBoundingClientRect();
+    const lastRow = rows[rows.length - 1].getBoundingClientRect();
+    const overlay = document.createElement('div');
+    overlay.textContent = span[2];
+    const boxH = lastRow.bottom - firstRow.top;
+    overlay.style.cssText = 'position:absolute;pointer-events:none;z-index:1;' +
+      'font-size:1.6rem;font-weight:900;color:rgba(26,60,110,0.18);' +
+      'letter-spacing:0.15em;white-space:nowrap;' +
+      'transform-origin:left center;transform:rotate(-55deg);' +
+      'left:' + (fRect.left - tRect.left) + 'px;' +
+      'top:' + (firstRow.top - tRect.top + boxH * 0.5) + 'px;';
+    container.appendChild(overlay);
+  }});
+}});
+</script>
 </body>
 </html>"""
     return html
