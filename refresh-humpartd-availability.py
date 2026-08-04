@@ -12,7 +12,7 @@ import json, datetime, subprocess, sys, os, tempfile
 # ── Configuration ────────────────────────────────────────────────────────────
 DL_GROUP_ID = "a9269596-444b-4c06-9a00-b027a9980a88"  # HUMPartD DL
 TEAM_DRIVE_ID = "b!V0AwNwlRpEW-fDOGOiiSuqsm8B-xxNVKoARQvmDfdE-9LAogW_-bQoiNmmhyq7-g"
-UPLOAD_FOLDER = "General"
+UPLOAD_FOLDER = "General/team calendar"
 UPLOAD_FILENAME = "humpartd-availability.html"
 
 # Explicit display order
@@ -35,7 +35,19 @@ HOLIDAYS = {
     datetime.date(2026, 11, 27): "Day after Thanksgiving",
 }
 
-START = datetime.date(2026, 8, 4)
+# Manual OOO overrides (dates not on Outlook calendars)
+MANUAL_OOO = {
+    "jake.klaisner@milliman.com": [
+        ("2026-08-20", "2026-08-23"),
+        ("2026-08-27", "2026-08-28"),
+        ("2026-09-17", "2026-09-20"),
+        ("2026-09-24", "2026-09-25"),
+        ("2026-10-15", "2026-10-16"),
+        ("2026-10-21", "2026-10-22"),
+    ],
+}
+
+START = datetime.date(2026, 8, 3)
 END = datetime.date(2026, 11, 30)
 
 # ── Helpers ──────────────────────────────────────────────────────────────────
@@ -121,6 +133,20 @@ def query_ooo(people):
 
     for email in sorted(people.keys(), key=lambda e: people[e]):
         print(f"  {people[email]}: {len(ooo[email])} OOO days")
+
+    # Merge manual overrides
+    for email, ranges in MANUAL_OOO.items():
+        if email not in ooo:
+            continue
+        for start_str, end_str in ranges:
+            d = datetime.date.fromisoformat(start_str)
+            end = datetime.date.fromisoformat(end_str)
+            while d <= end:
+                if d.weekday() < 5 and START <= d <= END:
+                    ooo[email].add(d)
+                d += datetime.timedelta(days=1)
+        print(f"  {people[email]}: {len(ooo[email])} OOO days (after manual overrides)")
+
     return ooo
 
 # ── Step 3: Generate HTML ───────────────────────────────────────────────────
